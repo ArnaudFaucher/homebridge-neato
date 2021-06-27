@@ -87,12 +87,7 @@ function NeatoVacuumRobotAccessory(platform, robotObject)
 	}
 	else
 	{
-		//const splitName = this.boundary.name.split(' ');
-		let serviceName = /*"Clean the " +*/ this.boundary.name;
-		/*if (splitName.length >= 2 && splitName[splitName.length - 2].match(/[']s$/g))
-		{
-			serviceName = "Clean " + this.boundary.name;
-		}*/
+		let serviceName = this.boundary.name;
 		this.cleanService = new Service.Switch(serviceName, "cleanBoundary:" + this.boundary.id);
 	}
 
@@ -171,24 +166,11 @@ NeatoVacuumRobotAccessory.prototype = {
 				this.spotCleanService.getCharacteristic(SpotHeightCharacteristic).on('get', this.getSpotHeight.bind(this));
 			}
 
-			//if (this.hiddenServices.indexOf('spot') === -1)
-			//{
-			//	this.services.push(this.spotCleanService);
-			//}
-
 			// Add optional services
 			if (this.hiddenServices.indexOf('dock') === -1)
 				this.services.push(this.goToDockService);
 			if (this.hiddenServices.indexOf('dockstate') === -1)
 				this.services.push(this.dockStateService);
-			//if (this.hiddenServices.indexOf('eco') === -1)
-			//	this.services.push(this.ecoService);
-			//if (this.hiddenServices.indexOf('nogolines') === -1)
-			//	this.services.push(this.noGoLinesService);
-			//if (this.hiddenServices.indexOf('extracare') === -1)
-			//	this.services.push(this.extraCareService);
-			//if (this.hiddenServices.indexOf('schedule') === -1)
-			//	this.services.push(this.scheduleService);
 			if (this.hiddenServices.indexOf('find') === -1)
 				this.services.push(this.findMeService);
 		}
