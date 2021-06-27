@@ -64,18 +64,18 @@ function NeatoVacuumRobotAccessory(platform, robotObject)
 		this.name = this.robot.name + ' - ' + this.boundary.name;
 	}
 
-	this.batteryService = new Service.BatteryService("Battery", "battery");
+	this.batteryService = new Service.BatteryService("Batterie", "battery");
 
 	if (this.boundary == null)
 	{
-		this.cleanService = new Service.Switch(this.name + " Clean", "clean");
-		this.goToDockService = new Service.Switch(this.name + " Go to Dock", "goToDock");
-		this.dockStateService = new Service.OccupancySensor(this.name + " Dock", "dockState");
+		this.cleanService = new Service.Switch("Nettoie avec " + this.name, "clean");
+		this.goToDockService = new Service.Switch("Retourne " + this.name + " à la base", "goToDock");
+		this.dockStateService = new Service.OccupancySensor(this.name + " à la base", "dockState");
 		this.ecoService = new Service.Switch(this.name + " Eco Mode", "eco");
 		this.noGoLinesService = new Service.Switch(this.name + " NoGo Lines", "noGoLines");
 		this.extraCareService = new Service.Switch(this.name + " Extra Care", "extraCare");
 		this.scheduleService = new Service.Switch(this.name + " Schedule", "schedule");
-		this.findMeService = new Service.Switch(this.name + " Find Me", "findMe");
+		this.findMeService = new Service.Switch("Trouve " + this.name, "findMe");
 
 		this.spotCleanService = new Service.Switch(this.name + " Clean Spot", "cleanSpot");
 		this.spotCleanService.addCharacteristic(SpotRepeatCharacteristic);
@@ -87,12 +87,12 @@ function NeatoVacuumRobotAccessory(platform, robotObject)
 	}
 	else
 	{
-		const splitName = this.boundary.name.split(' ');
-		let serviceName = "Clean the " + this.boundary.name;
-		if (splitName.length >= 2 && splitName[splitName.length - 2].match(/[']s$/g))
+		//const splitName = this.boundary.name.split(' ');
+		let serviceName = /*"Clean the " +*/ this.boundary.name;
+		/*if (splitName.length >= 2 && splitName[splitName.length - 2].match(/[']s$/g))
 		{
 			serviceName = "Clean " + this.boundary.name;
-		}
+		}*/
 		this.cleanService = new Service.Switch(serviceName, "cleanBoundary:" + this.boundary.id);
 	}
 
@@ -171,24 +171,24 @@ NeatoVacuumRobotAccessory.prototype = {
 				this.spotCleanService.getCharacteristic(SpotHeightCharacteristic).on('get', this.getSpotHeight.bind(this));
 			}
 
-			if (this.hiddenServices.indexOf('spot') === -1)
-			{
-				this.services.push(this.spotCleanService);
-			}
+			//if (this.hiddenServices.indexOf('spot') === -1)
+			//{
+			//	this.services.push(this.spotCleanService);
+			//}
 
 			// Add optional services
 			if (this.hiddenServices.indexOf('dock') === -1)
 				this.services.push(this.goToDockService);
 			if (this.hiddenServices.indexOf('dockstate') === -1)
 				this.services.push(this.dockStateService);
-			if (this.hiddenServices.indexOf('eco') === -1)
-				this.services.push(this.ecoService);
-			if (this.hiddenServices.indexOf('nogolines') === -1)
-				this.services.push(this.noGoLinesService);
-			if (this.hiddenServices.indexOf('extracare') === -1)
-				this.services.push(this.extraCareService);
-			if (this.hiddenServices.indexOf('schedule') === -1)
-				this.services.push(this.scheduleService);
+			//if (this.hiddenServices.indexOf('eco') === -1)
+			//	this.services.push(this.ecoService);
+			//if (this.hiddenServices.indexOf('nogolines') === -1)
+			//	this.services.push(this.noGoLinesService);
+			//if (this.hiddenServices.indexOf('extracare') === -1)
+			//	this.services.push(this.extraCareService);
+			//if (this.hiddenServices.indexOf('schedule') === -1)
+			//	this.services.push(this.scheduleService);
 			if (this.hiddenServices.indexOf('find') === -1)
 				this.services.push(this.findMeService);
 		}
