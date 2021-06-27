@@ -1,7 +1,7 @@
 {
-  "name": "homebridge-neato",
+  "name": "homebridge-neato-af",
   "version": "0.7.3",
-  "description": "A Neato vacuum robot plugin for homebridge.",
+  "description": "A Neato vacuum robot plugin for homebridge by AF.",
   "license": "MIT",
   "keywords": [
     "homebridge-plugin",
@@ -32,7 +32,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/naofireblade/homebridge-neato.git"
+    "url": "git://github.com/ArnaudFaucher/homebridge-neato"
   },
   "dependencies": {
     "colors": "^1.4.0",
